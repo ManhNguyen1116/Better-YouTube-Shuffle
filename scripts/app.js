@@ -1,7 +1,7 @@
 //  main.js
 const getPlaylistKey = () => document.getElementById("plKey").value;
 const list = document.getElementById("list")
-const ytPlayerAPI = document.getElementById("ytPlayerAPI");
+const p = document.getElementById("p");
 const json = "";
 const playlistArray = [];
 var arrayVideo = [];
@@ -11,6 +11,8 @@ localStorage.getItem("list");
 document.getElementById("list").innerHTML = localStorage.getItem("list");
 var counter = 0;
 var index = 0;
+const next = document.getElementById("nextButton");
+const prev = document.getElementById("prevButton");
 
 async function inputPlaylist(){
     plKey = getPlaylistKey();
@@ -52,6 +54,7 @@ async function inputPlaylist(){
 function startPlaylist(e){
     document.getElementById("playlists").style.display="none";
     document.getElementById("playlistForm").style.display="none";
+    document.getElementById("navbar").style.display="inline";
     var counter = 0;
     var filter = [];
     filter = concatArray.filter(obj=>obj);
@@ -62,6 +65,9 @@ function startPlaylist(e){
     )
     console.log(filarr);
     document.getElementById("mediaPlayer").innerHTML = `
+            <div class="buttons">
+                <button type="button" id="prevButton">Previous</button> <button type="button" id="nextButton">Next</button>
+            </div>
                 <ol id="oList">
             
                 </ol>
@@ -87,6 +93,7 @@ function startPlaylist(e){
 function shufflePlaylist(e){
     document.getElementById("playlists").style.display="none";
     document.getElementById("playlistForm").style.display="none";
+    document.getElementById("navbar").style.display="inline";
     var counter = 0;
     var filter = [];
     filter = concatArray.filter(obj=>obj);
@@ -134,15 +141,16 @@ function loadShuffle(e){
     console.log(player.videoId);
 }
 
-// 2. This code loads the IFrame Player API code asynchronously.
+//This code loads the IFrame Player API code asynchronously.
 var tag = document.createElement('script');
-    tag.src = "//www.youtube.com/iframe_api";
-    var firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+tag.src = "//www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 var player;
+
+//creates an <iframe> (and YouTube player) after the API code downloads.
 function loadPlayer(){
     
-    //creates an <iframe> (and YouTube player) after the API code downloads.
     player = new YT.Player('player', {
         height: '550',
         width: '580',
@@ -177,3 +185,11 @@ function onPlayerStateChange(event) {
 function stopVideo() {
     player.stopVideo();
 }
+
+next.addEventListener("click", function(event){
+
+});
+
+prev.addEventListener("click", function(event){
+
+});
