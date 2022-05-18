@@ -50,7 +50,6 @@ async function inputPlaylist(){
 }
 
 function startPlaylist(e){
-    
     var counter = 0;
     var filter = [];
     filter = concatArray.filter(obj=>obj);
@@ -70,10 +69,9 @@ function startPlaylist(e){
         if(e.parentNode.id === filarr[i].id){
             var videoArray = filarr[i].videos;
             for(var i = 0; i < videoArray.length; i++){
-                let index = 0;
                 counter++;
                 document.getElementById("oList").innerHTML += `<li value="${counter}" id="${videoArray[i].id}"><div class="thumbnail-root"><img src=${videoArray[i].thumbnail_url} class="thumbnail-img""></div>${videoArray[i].title}</li>`
-                document.getElementById("player").innerHTML = `<iframe id="test" width="560" height="315" src="https://www.youtube.com/embed/${videoArray[index].id}?start=0&autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
+                
             }
             arrayVideo = videoArray;
             console.log(videoArray);
@@ -85,7 +83,6 @@ function startPlaylist(e){
 }
 
 function shufflePlaylist(e){
-    
     var counter = 0;
     var filter = [];
     filter = concatArray.filter(obj=>obj);
@@ -113,7 +110,6 @@ function shufflePlaylist(e){
             for(var i = 0; i < videoArray.length; i++){
                 counter++
                 document.getElementById("oList").innerHTML += `<li value="${counter}" id="${videoArray[i].id}"><div class="thumbnail-root"><img src=${videoArray[i].thumbnail_url} class="thumbnail-img""></div>${videoArray[i].title}</li>`
-                document.getElementById("test").innerHTML = `<param id="vID" value="${videoArray[0].id}">`
             }
             console.log(videoArray);
             arrayVideo = videoArray;
