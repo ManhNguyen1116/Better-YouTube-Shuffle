@@ -50,6 +50,8 @@ async function inputPlaylist(){
 }
 
 function startPlaylist(e){
+    document.getElementById("playlists").style.display="none";
+    document.getElementById("playlistForm").style.display="none";
     var counter = 0;
     var filter = [];
     filter = concatArray.filter(obj=>obj);
@@ -70,7 +72,7 @@ function startPlaylist(e){
             var videoArray = filarr[i].videos;
             for(var i = 0; i < videoArray.length; i++){
                 counter++;
-                document.getElementById("oList").innerHTML += `<li value="${counter}" id="${videoArray[i].id}"><div class="thumbnail-root"><img src=${videoArray[i].thumbnail_url} class="thumbnail-img""></div>${videoArray[i].title}</li>`
+                document.getElementById("oList").innerHTML += `<li value="${counter}" id="${counter}"><div class="thumbnail-root"><img src=${videoArray[i].thumbnail_url} class="thumbnail-img""></div>${videoArray[i].title}</li>`
                 
             }
             arrayVideo = videoArray;
@@ -83,6 +85,8 @@ function startPlaylist(e){
 }
 
 function shufflePlaylist(e){
+    document.getElementById("list").style.display="none";
+    document.getElementsByClassName("playlists").style.display="none";
     var counter = 0;
     var filter = [];
     filter = concatArray.filter(obj=>obj);
@@ -140,8 +144,8 @@ function loadPlayer(){
     
     //creates an <iframe> (and YouTube player) after the API code downloads.
     player = new YT.Player('player', {
-        height: '390',
-        width: '640',
+        height: '550',
+        width: '600',
         videoId: vid,
         playerVars: {
             'playsinline': 1, 'autoplay': 1, 'start': 0
