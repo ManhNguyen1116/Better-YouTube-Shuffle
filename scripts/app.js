@@ -1,7 +1,7 @@
 //  main.js
 const getPlaylistKey = () => document.getElementById("plKey").value;
-const list = document.getElementById("list")
-const p = document.getElementById("p");
+const list = document.getElementById("list");
+const buttons = document.getElementById("buttons");
 const json = "";
 const playlistArray = [];
 var arrayVideo = [];
@@ -37,7 +37,7 @@ async function inputPlaylist(){
         console.log(json);
         playlistArray.push(json);
         concatArray.push(json);
-        list.innerHTML += `<li id="${json.id}" class="this-playlist""><div class="thumbnail-root"><img src=${json.thumbnail_url} class="thumbnail-img""></div>${json.title} <input type="button" value="Play" onclick="startPlaylist(this)"> <input type="button" value="Shuffle" onclick="loadShuffle(this)"> <input type="button" value="Delete" onclick="removePlaylist(this)"></li>`;
+        list.innerHTML += `<li id="${json.id}" value="${json.title}" class="this-playlist""><div class="thumbnail-root"><img src=${json.thumbnail_url} class="thumbnail-img""></div>${json.title} <input type="button" value="Play" onclick="startPlaylist(this)"> <input type="button" value="Shuffle" onclick="shufflePlaylist(this)"> <input type="button" value="Delete" onclick="removePlaylist(this)"></li>`;
         let y = localStorage.getItem("playlistArray");
         if(y){
             y = JSON.parse(y);
@@ -63,18 +63,16 @@ function startPlaylist(e){
         t.id === value.id
         ))
     )
-    console.log(filarr);
-    document.getElementById("mediaPlayer").innerHTML = `
-            <div class="buttons">
-                <button type="button" id="prevButton">Previous</button> <button type="button" id="nextButton">Next</button>
-            </div>
+    document.getElementById("videoList").innerHTML = `
                 <ol id="oList">
             
                 </ol>
             
         <br>`
+    buttons.innerHTML = `<button type="button" id="prevButton">Previous</button> <button type="button" id="nextButton">Next</button>`
     for(var i = 0; i < filarr.length; i++){
         if(e.parentNode.id === filarr[i].id){
+            document.getElementById("playlistName").innerHTML = `${filarr[i].title}`
             var videoArray = filarr[i].videos;
             for(var i = 0; i < videoArray.length; i++){
                 counter++;
@@ -82,7 +80,6 @@ function startPlaylist(e){
                 
             }
             arrayVideo = videoArray;
-            console.log(videoArray);
             vid = videoArray[0].id;
             loadPlayer();
             return arrayVideo;
@@ -102,14 +99,15 @@ function shufflePlaylist(e){
         t.id === value.id
         ))
     )
-    console.log(filarr);
-    document.getElementById("mediaPlayer").innerHTML = `
+    document.getElementById("playlistName").innerHTML = `${e.parentNode.title}`
+    document.getElementById("videoList").innerHTML = `
                 <ol id="oList">
             
                 </ol>
         <br>`
     for(var i = 0; i < filarr.length; i++){
         if(e.parentNode.id === filarr[i].id){
+            document.getElementById("playlistName").innerHTML = `${filarr[i].title}`
             var videoArray = filarr[i].videos;
             let currentIndex = videoArray.length, randomIndex
             while(currentIndex != 0){
@@ -122,7 +120,6 @@ function shufflePlaylist(e){
                 counter++
                 document.getElementById("oList").innerHTML += `<li value="${counter}" id="${videoArray[i].id}"><div class="thumbnail-root"><img src=${videoArray[i].thumbnail_url} class="thumbnail-img""></div>${videoArray[i].title}</li>`
             }
-            console.log(videoArray);
             arrayVideo = videoArray;
             vid = arrayVideo[0].id;
             loadPlayer();
@@ -134,11 +131,6 @@ function shufflePlaylist(e){
 function removePlaylist(e){
     e.parentNode.parentNode.removeChild(e.parentNode);
     localStorage.setItem("list", list.innerHTML);
-}
-
-function loadShuffle(e){
-    shufflePlaylist(e);
-    console.log(player.videoId);
 }
 
 //This code loads the IFrame Player API code asynchronously.
