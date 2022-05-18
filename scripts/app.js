@@ -10,7 +10,7 @@ const concatArray = playlistArray.concat(x);
 localStorage.getItem("list");
 document.getElementById("list").innerHTML = localStorage.getItem("list");
 var counter = 0;
-
+var index = 0;
 
 async function inputPlaylist(){
     plKey = getPlaylistKey();
@@ -50,6 +50,9 @@ async function inputPlaylist(){
 }
 
 function startPlaylist(e){
+    if(player !== undefined){
+        player.destroy();
+    }
     var counter = 0;
     var filter = [];
     filter = concatArray.filter(obj=>obj);
@@ -84,6 +87,9 @@ function startPlaylist(e){
 }
 
 function shufflePlaylist(e){
+    if(player !== undefined){
+        player.destroy();
+    }
     var counter = 0;
     var filter = [];
     filter = concatArray.filter(obj=>obj);
@@ -109,7 +115,7 @@ function shufflePlaylist(e){
                 [videoArray[currentIndex], videoArray[randomIndex]] = [videoArray[randomIndex], videoArray[currentIndex]];
             }
             for(var i = 0; i < videoArray.length; i++){
-                counter++;
+                counter++
                 document.getElementById("oList").innerHTML += `<li value="${counter}" id="${videoArray[i].id}"><div class="thumbnail-root"><img src=${videoArray[i].thumbnail_url} class="thumbnail-img""></div>${videoArray[i].title}</li>`
                 document.getElementById("test").innerHTML = `<param id="vID" value="${videoArray[0].id}">`
             }
@@ -146,7 +152,7 @@ function loadPlayer(){
         width: '640',
         videoId: vid,
         playerVars: {
-            'playsinline': 1
+            'playsinline': 1, 'autoplay': 1, 'start': 0
         },
         events: {
             'onReady': onPlayerReady,
@@ -164,10 +170,10 @@ function onPlayerReady(event) {
 //The function indicates that when playing a video (state=1),
 // the player should play for six seconds and then stop.
 function onPlayerStateChange(event) {
-    if (event.data === 0 || event.data === -1) {
-        counter++;
+    if (event.data === YT.PlayerState.ENDED) {
+        index++;
         player.loadVideoById({
-            videoId: arrayVideo[counter].id,
+            videoId: arrayVideo[index].id,
             startSeconds: 0
         });
     }
