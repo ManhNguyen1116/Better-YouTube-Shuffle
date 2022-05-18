@@ -69,14 +69,14 @@ function startPlaylist(e){
                 </ol>
             
         <br>`
-    buttons.innerHTML = `<button type="button" id="prevButton">Previous</button> <button type="button" id="nextButton">Next</button>`
+    buttons.innerHTML = `<button type="button" id="prevButton" onclick="previousVideo()">Previous</button> <button type="button" id="nextButton" onclick="nextVideo()">Next</button>`
     for(var i = 0; i < filarr.length; i++){
         if(e.parentNode.id === filarr[i].id){
             document.getElementById("playlistName").innerHTML = `${filarr[i].title}`
             var videoArray = filarr[i].videos;
             for(var i = 0; i < videoArray.length; i++){
                 counter++;
-                document.getElementById("oList").innerHTML += `<li value="${counter}" id="${counter}"><div class="thumbnail-root"><img src=${videoArray[i].thumbnail_url} class="thumbnail-img""></div>${videoArray[i].title}</li>`
+                document.getElementById("oList").innerHTML += `<li value="${counter}" id="${videoArray[i].id}" onmousedown="selectVideo(this)"><div class="thumbnail-root"><img src=${videoArray[i].thumbnail_url} class="thumbnail-img""></div>${videoArray[i].title}</li>`
                 
             }
             arrayVideo = videoArray;
@@ -105,6 +105,7 @@ function shufflePlaylist(e){
             
                 </ol>
         <br>`
+    buttons.innerHTML = `<button type="button" id="prevButton" onclick="previousVideo()">Previous</button> <button type="button" id="nextButton" onclick="nextVideo()">Next</button>`
     for(var i = 0; i < filarr.length; i++){
         if(e.parentNode.id === filarr[i].id){
             document.getElementById("playlistName").innerHTML = `${filarr[i].title}`
@@ -118,7 +119,7 @@ function shufflePlaylist(e){
             }
             for(var i = 0; i < videoArray.length; i++){
                 counter++
-                document.getElementById("oList").innerHTML += `<li value="${counter}" id="${videoArray[i].id}"><div class="thumbnail-root"><img src=${videoArray[i].thumbnail_url} class="thumbnail-img""></div>${videoArray[i].title}</li>`
+                document.getElementById("oList").innerHTML += `<li value="${counter}" id="${videoArray[i].id}" onmousedown="selectVideo(this)"><div class="thumbnail-root"><img src=${videoArray[i].thumbnail_url} class="thumbnail-img""></div>${videoArray[i].title}</li>`
             }
             arrayVideo = videoArray;
             vid = arrayVideo[0].id;
@@ -148,7 +149,7 @@ function loadPlayer(){
         width: '580',
         videoId: vid,
         playerVars: {
-            'playsinline': 1, 'autoplay': 1, 'start': 0
+            'playsinline': 1, 'autoplay': 1, 'start': 0, 'rel': 0
         },
         events: {
             'onReady': onPlayerReady,
@@ -178,10 +179,36 @@ function stopVideo() {
     player.stopVideo();
 }
 
-next.addEventListener("click", function(event){
+function nextVideo(){
+    if(index === arrayVideo.length-1){
+        
+    }
+    else{
+        index++;
+        player.loadVideoById({
+            videoId: arrayVideo[index].id,
+            startSeconds: 0
+        });
+    }
+}
 
-});
+function previousVideo(){
+    if(index-1 === -1){
+        
+    }
+    else{
+        index--;
+        player.loadVideoById({
+            videoId: arrayVideo[index].id,
+            startSeconds: 0
+        });
+    }
+}
 
-prev.addEventListener("click", function(event){
-
-});
+function selectVideo(e){
+    index = e.value-1;
+    player.loadVideoById({
+        videoId: e.id,
+            startSeconds: 0
+    });
+}
