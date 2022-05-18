@@ -50,8 +50,6 @@ async function inputPlaylist(){
 }
 
 function startPlaylist(e){
-    document.getElementById("playlists").style.display="none";
-    document.getElementById("playlistForm").style.display="none";
     var counter = 0;
     var filter = [];
     filter = concatArray.filter(obj=>obj);
@@ -85,8 +83,6 @@ function startPlaylist(e){
 }
 
 function shufflePlaylist(e){
-    document.getElementById("list").style.display="none";
-    document.getElementsByClassName("playlists").style.display="none";
     var counter = 0;
     var filter = [];
     filter = concatArray.filter(obj=>obj);
@@ -135,17 +131,17 @@ function loadShuffle(e){
 }
 
 // 2. This code loads the IFrame Player API code asynchronously.
-var player;
-function loadPlayer(){
-    var tag = document.createElement('script');
+var tag = document.createElement('script');
     tag.src = "//www.youtube.com/iframe_api";
     var firstScriptTag = document.getElementsByTagName('script')[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+var player;
+function loadPlayer(){
     
     //creates an <iframe> (and YouTube player) after the API code downloads.
     player = new YT.Player('player', {
         height: '550',
-        width: '600',
+        width: '580',
         videoId: vid,
         playerVars: {
             'playsinline': 1, 'autoplay': 1, 'start': 0
