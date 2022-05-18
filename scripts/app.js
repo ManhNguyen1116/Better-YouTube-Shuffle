@@ -50,6 +50,8 @@ async function inputPlaylist(){
 }
 
 function startPlaylist(e){
+    document.getElementById("playlists").style.display="none";
+    document.getElementById("playlistForm").style.display="none";
     var counter = 0;
     var filter = [];
     filter = concatArray.filter(obj=>obj);
@@ -83,6 +85,8 @@ function startPlaylist(e){
 }
 
 function shufflePlaylist(e){
+    document.getElementById("playlists").style.display="none";
+    document.getElementById("playlistForm").style.display="none";
     var counter = 0;
     var filter = [];
     filter = concatArray.filter(obj=>obj);
