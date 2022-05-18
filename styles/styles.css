@@ -100,6 +100,7 @@ ul{
     flex-direction: column;
     flex-basis: auto;
     flex: 1;
+    height: 550px;
 }
 
 .buttons{
