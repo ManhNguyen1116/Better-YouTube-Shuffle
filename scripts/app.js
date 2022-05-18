@@ -50,9 +50,7 @@ async function inputPlaylist(){
 }
 
 function startPlaylist(e){
-    if(player !== undefined){
-        player.destroy();
-    }
+    
     var counter = 0;
     var filter = [];
     filter = concatArray.filter(obj=>obj);
@@ -87,9 +85,7 @@ function startPlaylist(e){
 }
 
 function shufflePlaylist(e){
-    if(player !== undefined){
-        player.destroy();
-    }
+    
     var counter = 0;
     var filter = [];
     filter = concatArray.filter(obj=>obj);
@@ -142,7 +138,7 @@ function loadShuffle(e){
 var player;
 function loadPlayer(){
     var tag = document.createElement('script');
-    tag.src = "https://www.youtube.com/iframe_api";
+    tag.src = "//www.youtube.com/iframe_api";
     var firstScriptTag = document.getElementsByTagName('script')[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
     
