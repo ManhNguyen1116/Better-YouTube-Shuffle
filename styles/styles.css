@@ -5,6 +5,22 @@ body{
     color: #FFFFFF;
 }
 
+input[type="button"]{
+    color: white;
+    background-color: #111;
+    width: auto;
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
+    font-family: "OptimusPrincepsSemiBold";
+    border-color: #a3a3a2;
+    border-radius: 6%;
+}
+
+input[type="text"]{
+    width: 400px;
+    height: 26px;
+}
+
 ol{
     max-height: 500px;
     overflow:auto;
@@ -76,6 +92,7 @@ ul{
     border-radius: 50%;
     justify-content: center;
     margin-right: 10px;
+    vertical-align: middle;
 }
 
 .thumbnail-img{
