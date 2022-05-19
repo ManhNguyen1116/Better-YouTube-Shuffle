@@ -34,7 +34,15 @@ ul{
     text-align: center;
     padding: 0px 16px;
     text-decoration: none;
-    font-size: 17px;
+    font-size: larger;
+    font-weight: bold;
+}
+
+.topnav img{
+    width: 64px;
+    height: auto;
+    margin-bottom: -8px;
+    border-radius: 10%;
 }
 
 .playlistBar{
