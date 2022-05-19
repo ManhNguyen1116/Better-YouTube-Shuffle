@@ -8,8 +8,9 @@ const x = (JSON.parse(localStorage.getItem("playlistArray")));
 const concatArray = playlistArray.concat(x);
 localStorage.getItem("list");
 document.getElementById("list").innerHTML = localStorage.getItem("list");
-var counter = 0;
 var index = 0;
+var playlistCounter = (index + 1);
+var numberOfSongs = 0;
 const next = document.getElementById("nextButton");
 const prev = document.getElementById("prevButton");
 
@@ -71,7 +72,8 @@ function startPlaylist(e){
     buttons.innerHTML = `<button type="button" id="prevButton" onclick="previousVideo()">Previous</button> <button type="button" id="nextButton" onclick="nextVideo()">Next</button>`
     for(var i = 0; i < filarr.length; i++){
         if(e.parentNode.id === filarr[i].id){
-            document.getElementById("playlistName").innerHTML = `${filarr[i].title}`
+            numberOfSongs = filarr[i].videos.length;
+            document.getElementById("playlistName").innerHTML = `${filarr[i].title}   <div id="plCounter">(${playlistCounter}/${numberOfSongs})</div>`
             var videoArray = filarr[i].videos;
             for(var i = 0; i < videoArray.length; i++){
                 counter++;
@@ -167,11 +169,23 @@ function onPlayerReady(event) {
 // the player should play for six seconds and then stop.
 function onPlayerStateChange(event) {
     if (event.data === YT.PlayerState.ENDED) {
-        index++;
-        player.loadVideoById({
-            videoId: arrayVideo[index].id,
-            startSeconds: 0
-        });
+        if(index === arrayVideo.length-1){
+
+        }
+        else{
+            index++;
+            if(playlistCounter === numberOfSongs){
+                playlistCounter = index;
+            }
+            else{
+                playlistCounter = index + 1;
+            }
+            document.getElementById("plCounter").innerHTML = `(${playlistCounter}/${numberOfSongs})`;
+            player.loadVideoById({
+                videoId: arrayVideo[index].id,
+                startSeconds: 0
+            });
+        }
     }
 }
 function stopVideo() {
@@ -184,6 +198,10 @@ function nextVideo(){
     }
     else{
         index++;
+        
+        playlistCounter = index + 1;
+        
+        document.getElementById("plCounter").innerHTML = `(${playlistCounter}/${numberOfSongs})`;
         player.loadVideoById({
             videoId: arrayVideo[index].id,
             startSeconds: 0
@@ -193,10 +211,17 @@ function nextVideo(){
 
 function previousVideo(){
     if(index-1 === -1){
-        
+
     }
     else{
         index--;
+        if(playlistCounter === numberOfSongs){
+            playlistCounter = index + 1;
+        }
+        else{
+            playlistCounter = index + 1;
+        }
+        document.getElementById("plCounter").innerHTML = `(${playlistCounter}/${numberOfSongs})`;
         player.loadVideoById({
             videoId: arrayVideo[index].id,
             startSeconds: 0
@@ -206,6 +231,9 @@ function previousVideo(){
 
 function selectVideo(e){
     index = e.value-1;
+    
+    playlistCounter = index + 1;
+    document.getElementById("plCounter").innerHTML = `(${playlistCounter}/${numberOfSongs})`;
     player.loadVideoById({
         videoId: e.id,
             startSeconds: 0
