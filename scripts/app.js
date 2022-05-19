@@ -69,7 +69,7 @@ function startPlaylist(e){
                 </ol>
             
         <br>`
-    buttons.innerHTML = `<button type="button" id="prevButton" onclick="previousVideo()">Previous</button> <button type="button" id="nextButton" onclick="nextVideo()">Next</button>`
+    buttons.innerHTML = `<button type="button" id="prevButton" onclick="previousVideo()">&#60</button> <button type="button" id="nextButton" onclick="nextVideo()">&#62</button>`
     for(var i = 0; i < filarr.length; i++){
         if(e.parentNode.id === filarr[i].id){
             numberOfSongs = filarr[i].videos.length;
@@ -106,7 +106,7 @@ function shufflePlaylist(e){
             
                 </ol>
         <br>`
-    buttons.innerHTML = `<button type="button" id="prevButton" onclick="previousVideo()">Previous</button> <button type="button" id="nextButton" onclick="nextVideo()">Next</button>`
+    buttons.innerHTML = `<button type="button" id="prevButton" class="prevButton" onclick="previousVideo()">&#60</button> <button type="button" id="nextButton" onclick="nextVideo()">&#62</button>`
     for(var i = 0; i < filarr.length; i++){
         if(e.parentNode.id === filarr[i].id){
             numberOfSongs = filarr[i].videos.length;
