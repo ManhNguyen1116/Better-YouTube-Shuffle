@@ -2,7 +2,6 @@
 const getPlaylistKey = () => document.getElementById("plKey").value;
 const list = document.getElementById("list");
 const buttons = document.getElementById("buttons");
-const json = "";
 const playlistArray = [];
 var arrayVideo = [];
 const x = (JSON.parse(localStorage.getItem("playlistArray")));
@@ -77,7 +76,7 @@ function startPlaylist(e){
             for(var i = 0; i < videoArray.length; i++){
                 counter++;
                 document.getElementById("oList").innerHTML += `<li value="${counter}" id="${videoArray[i].id}" onmousedown="selectVideo(this)"><div class="thumbnail-root"><img src=${videoArray[i].thumbnail_url} class="thumbnail-img""></div>${videoArray[i].title}</li>`
-                
+
             }
             arrayVideo = videoArray;
             vid = videoArray[0].id;
