@@ -109,7 +109,8 @@ function shufflePlaylist(e){
     buttons.innerHTML = `<button type="button" id="prevButton" onclick="previousVideo()">Previous</button> <button type="button" id="nextButton" onclick="nextVideo()">Next</button>`
     for(var i = 0; i < filarr.length; i++){
         if(e.parentNode.id === filarr[i].id){
-            document.getElementById("playlistName").innerHTML = `${filarr[i].title}`
+            numberOfSongs = filarr[i].videos.length;
+            document.getElementById("playlistName").innerHTML = `${filarr[i].title}   <div id="plCounter">(${playlistCounter}/${numberOfSongs})</div>`
             var videoArray = filarr[i].videos;
             let currentIndex = videoArray.length, randomIndex
             while(currentIndex != 0){
